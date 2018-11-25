@@ -27,6 +27,9 @@ class GUI_Isohypses(QWidget):
         for i in range(12):
             if i<6:
                 self.scene_.addEllipse(50 + wid / 9 * (i + 1), hgt / 8, hgt / 4, hgt / 4)
+                text = self.scene_.addText("4")
+                text.setPos(100 + wid / 9 * (i + 1), 50 + hgt / 8)
+                self.liste_texte[5-i] = text
 #                txt = QLabel("4", self)
 #                txt.setDisabled(True)
 #                txt.setAlignment(Qt.AlignCenter)
@@ -36,6 +39,9 @@ class GUI_Isohypses(QWidget):
 #                self.liste_texte[5-i] = txt
             else:
                 self.scene_.addEllipse(50 + wid / 9 * (i - 5), hgt / 8 * 5, hgt / 4, hgt / 4)
+                text = self.scene_.addText("4")
+                text.setPos(100 + wid / 9 * (i - 5), 50 + hgt / 8 * 5)
+                self.liste_texte[i + 1] = text
                 #txt = QLabel("4", self)
                 #txt.setDisabled(True)
                 #txt.setAlignment(Qt.AlignCenter)
@@ -45,6 +51,9 @@ class GUI_Isohypses(QWidget):
                 #self.liste_texte[i + 1] = txt
 
         self.scene_.addRect(50, hgt / 8 - 10, hgt / 4, hgt - (hgt / 8 - 10) * 2)
+        text = self.scene_.addText("0")
+        text.setPos(100, 150 + hgt / 8 - 10)
+        self.liste_texte[6] = text
 #        txt = QLabel("1", self)
 #        txt.setAlignment(Qt.AlignCenter)
 #        txt.setWordWrap(True)
@@ -54,6 +63,9 @@ class GUI_Isohypses(QWidget):
 
 
         self.scene_.addRect(50 + wid / 9 * 7, hgt / 8 - 10, hgt / 4, hgt - (hgt / 8 - 10) * 2)
+        text = self.scene_.addText("0")
+        text.setPos(100 + wid / 9 * 7, 150 + hgt / 8 - 10)
+        self.liste_texte[13] = text
 #        txt = QLabel("1", self)
 #        txt.setAlignment(Qt.AlignCenter)
 #        txt.setWordWrap(True)
@@ -63,12 +75,14 @@ class GUI_Isohypses(QWidget):
 
 
 
+
     def bouger(self, col, ligne):
         self.jeu.déplacer(col, ligne)
         
     def MAJ_val(self, liste_val):
         for i in range(14):
-            self.liste_texte.setText(liste_val[i])
+            self.liste_texte[i].setPlainText(str(liste_val[i]))
+            
         
 
 

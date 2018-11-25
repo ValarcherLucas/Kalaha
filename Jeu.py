@@ -34,7 +34,7 @@ class Jeu():
                 elif self.joueur == 2 and retour >= 0 and retour <= 5:
                     self.modelisation.vider(self.joueur, retour)
             print(self.modelisation.plateau)
-            #self.gui.MAJ_val(self.modelisation.plateau)
+            self.gui.MAJ_val(self.modelisation.plateau)
             
             if (self.joueur == 1 and retour != 13) or (self.joueur == 2 and retour != 6):
                 if self.joueur == 1:
