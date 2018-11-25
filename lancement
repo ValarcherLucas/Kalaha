@@ -14,6 +14,15 @@ class FenetreLancement(QWidget):
         self.b_quitter_.setText("Quitter")
         self.b_quitter_.setFont(QFont("Arial",16))
         
+        monLayout = QGridLayout()
+        # placement des boutons, on donne le n° de ligne, le n° de colonne
+        # et le nombre de lignes et de colonnes occupées
+        monLayout.addWidget(self.b_charger_fichier_, 0, 0, 1, 2) # n° ligne n° colonne
+        monLayout.addWidget(self.b_tracer_isohypses_, 3, 0, 1, 2) # disposé sur 1 ligne et 2 colonnes
+        monLayout.addWidget(self.b_quitter_, 5, 0, 1, 2)
+
+self.setLayout(monLayout)
+        
     def main():
         app = QApplication([])
 
