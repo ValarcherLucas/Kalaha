@@ -1,1 +1,26 @@
 
+from PyQT5.QtWidgets import *
+from PyQT5.QtGui import *
+from PyQt5.QtCore import Qt
+
+class FenetreLancement(QWidget):
+
+    def __init__(self):
+        QWidget.__init__(self)
+
+        self.setWindowTitle("Contre qui voulez vous jouer ? ")
+
+        self.b_quitter_ = QPushButton("???")
+        self.b_quitter_.setText("Quitter")
+        self.b_quitter_.setFont(QFont("Arial",16))
+        
+    def main():
+        app = QApplication([])
+
+        gui = FenetreLancement()
+        gui.show()
+
+        r = app.exec()
+
+if __name__== "__main__":
+    main()
