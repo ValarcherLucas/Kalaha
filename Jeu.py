@@ -3,12 +3,16 @@ from Modelisation import Modele
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
+from JoueurHumain import JoueurHumain
+from JoueurOrdi import JoueurOrdi
 
 class Jeu():
     def __init__(self):
         
         self.modelisation = Modele()
         self.joueur = 1
+        self.Joueur1 = JoueurHumain()
+        self.Joueur2 = JoueurOrdi(0)
         
         
         print("done")
@@ -22,7 +26,19 @@ class Jeu():
         # lancement de l'application
         r = app.exec_()
 
-    def déplacer(self, col, ligne):
+    def reception_clic(self, col, ligne):
+        if (self.joueur == 1 and self.Joueur1.humain) or (self.joueur == 2 and self.Joueur2.humain):
+            self.deplacer(col, ligne)
+
+    def choix_clic(self, col):
+        if self.joueur == 1:
+            self.deplacer(col, 1)
+        else :
+            self.deplacer(col, 0)
+
+
+
+    def deplacer(self, col, ligne):
         if ligne == 0:
             col = 5 - col
         indice = col + ligne * 7
@@ -39,8 +55,17 @@ class Jeu():
             if (self.joueur == 1 and retour != 13) or (self.joueur == 2 and retour != 6):
                 if self.joueur == 1:
                     self.joueur = 2
+                    choix = self.Joueur2.jouer()
                 else:
                     self.joueur = 1
+                    choix = self.Joueur1.jouer()
+        if self.joueur == 1:
+            choix = self.Joueur1.jouer()
+        else:
+            print("coucou")
+            choix = self.Joueur2.jouer()
+        if choix != -1:
+            self.choix_clic(choix)
 
 if __name__ == "__main__":
     jeu = Jeu()

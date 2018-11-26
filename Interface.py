@@ -77,7 +77,7 @@ class GUI_Isohypses(QWidget):
 
 
     def bouger(self, col, ligne):
-        self.jeu.déplacer(col, ligne)
+        self.jeu.reception_clic(col, ligne)
         
     def MAJ_val(self, liste_val):
         for i in range(14):
