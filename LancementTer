@@ -1,0 +1,97 @@
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import Qt
+
+#définition d'une GUI
+
+class GUI_Lancement(QWidget):
+    def __init__(self):
+        QWidget.__init__(self)
+
+        self.setWindowTitle("Jeu du Kahala, Contre qui voulez vous jouer ?")
+
+    #CREATION DES DIFFERENTS BOUTONS
+    #création bouton quitter
+        self.bquitter_ = QPushButton("Je veux quitter le jeu",self)
+        self.bquitter_.setText("Quitter")
+        self.bquitter_.setFont(QFont("Comic Sans MS", 16))
+        # Connexion du clic du bouton à la fermeture de l'application
+        self.bquitter_.clicked.connect(qApp.quit)
+
+    #création bouton Joueur vs Joueur
+        self.bj_vs_j_ = QPushButton("Je joue avec une autre personne", self)
+        self.bj_vs_j_.setText("Joueur vs Joueur")
+        self.bj_vs_j_.setFont(QFont("Comic Sans MS", 16))
+        self.bj_vs_j_.clicked.connect(self.j_vs_j)
+
+    #création bouton Joueur vs Ordinateur
+        self.bj_vs_ai__ = QPushButton("Je joue contre l'ordinateur", self)
+        self.bj_vs_ai__.setText("Joueur vs Ordinateur")
+        self.bj_vs_ai__.setFont(QFont("Comic Sans MS", 16))
+        self.bj_vs_j_.clicked.connect(self.j_vs_ai)
+
+        monLayout = QGridLayout()
+
+    #placement des boutons
+        monLayout.addWidget(self.bquitter_, 2, 0, 1, 1)
+        monLayout.addWidget(self.bj_vs_j_, 0, 0, 1, 1)
+        monLayout.addWidget(self.bj_vs_ai__, 1, 0, 1, 1)
+
+        self.setLayout(monLayout)
+
+    #def j_vs_j(self):
+
+    def j_vs_ai(self):
+
+        self.setWindowTitle("Quel niveau voulez vous?")
+
+        # création bouton quitter
+        self.bquitter2_ = QPushButton("Je veux quitter le jeu", self)
+        self.bquitter2_.setText("Quitter")
+        self.bquitter2_.setFont(QFont("Comic Sans MS", 16))
+        # Connexion du clic du bouton à la fermeture de l'application
+        self.bquitter2_.clicked.connect(qApp.quit)
+
+        # création bouton Joueur vs Joueur
+        self.bniv1_ = QPushButton("Niveau facile", self)
+        self.bniv1_.setText("Niveau facile")
+        self.bniv1_.setFont(QFont("Comic Sans MS", 16))
+        self.bniv1_.clicked.connect(self.bniv1_)
+
+        # création bouton Joueur vs Joueur
+        self.bniv2_ = QPushButton("Niveau intermédiaire", self)
+        self.bniv2_.setText("Niveau intermédiaire")
+        self.bniv2_.setFont(QFont("Comic Sans MS", 16))
+        self.bniv2_.clicked.connect(self.bniv2_)
+
+        # création bouton Joueur vs Joueur
+        self.bniv3_ = QPushButton("Niveau difficile", self)
+        self.bniv3_.setText("Niveau difficile")
+        self.bniv3_.setFont(QFont("Comic Sans MS", 16))
+        self.bniv3_.clicked.connect(self.bniv2_)
+
+        monLayout = QGridLayout()
+
+        # placement des boutons
+        monLayout.addWidget(self.bquitter2_, 3, 0, 1, 1)
+        monLayout.addWidget(self.bniv1_, 0, 0, 1, 1)
+        monLayout.addWidget(self.bniv2_, 1, 0, 1, 1)
+        monLayout.addWidget(self.bniv3_, 2, 0, 1, 1)
+
+
+
+def main():
+    #création d'une application
+    app = QApplication([])  # on peut aussi passer en paramètre les arguments du programme sys.argv
+
+    #création d'une interface
+    gui = GUI_Lancement()
+
+    #affichage de l'interface
+    gui.show()
+
+    #lancement de l'application
+    r = app.exec_()
+
+if __name__ == "__main__":
+    main()
