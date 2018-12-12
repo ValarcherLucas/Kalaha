@@ -1,0 +1,38 @@
+
+from PyQT5.QtWidgets import *
+from PyQT5.QtGui import *
+from PyQt5.QtCore import Qt
+
+class FenetreLancement(QWidget):
+
+    def __init__(self):
+        QWidget.__init__(self)
+
+        self.setWindowTitle("Contre qui voulez vous jouer ? ")
+
+        #BOUTON QUITTER
+        self.b_quitter_ = QPushButton("???")
+        self.b_quitter_.setText("Quitter")
+        self.b_quitter_.setFont(QFont("Arial",16))
+        self.b_quitter_.clicked.connect(qApp.quit)
+        
+        #LAYOUT
+        monLayout = QGridLayout()
+        # placement des boutons, on donne le n° de ligne, le n° de colonne
+        # et le nombre de lignes et de colonnes occupées
+        monLayout.addWidget(self.b_jVsj_, 0, 0, 1, 2) # n° ligne n° colonne
+        monLayout.addWidget(self.b_jVsO_, 3, 0, 1, 2) # disposé sur 1 ligne et 2 colonnes
+        monLayout.addWidget(self.b_quitter_, 5, 0, 1, 2)
+
+        self.setLayout(monLayout)
+        
+    def main():
+        app = QApplication([])
+
+        gui = FenetreLancement()
+        gui.show()
+
+        r = app.exec()
+
+if __name__== "__main__":
+    main()
