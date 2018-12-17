@@ -4,11 +4,15 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from QScene import *
+from PyQt5 import QtTest
 
 # definition d'une GUI
 class GUI_Isohypses(QWidget):
+    """
+    Classe permettant de visualiser l'état du jeu et d'interagir avec celui-ci
+    """
     def __init__(self, jeu):
-        # on crée la fenêtre graphique
+        # Création de la fenètre avec ses paramètres basiques
         QWidget.__init__(self)
         self.setWindowTitle("Kalaha")
         wid, hgt = 1000, 400
@@ -18,11 +22,14 @@ class GUI_Isohypses(QWidget):
         #self.scene_.addLine(0, hgt / 2, 50, hgt / 2)
         #self.scene_.addLine(50 + wid / 9 * 7 + hgt / 4 , hgt / 2, wid, hgt / 2)
         #self.scene_.addLine(50 + hgt / 4, hgt / 2, 50 + wid / 9 * 7, hgt / 2)
+
+        # Dessin des contours de la zone de jeu
         self.scene_.addLine(0, 0, 0, hgt)
         self.scene_.addLine(0, 0, wid, 0)
         self.scene_.addLine(0, hgt, wid, hgt)
         self.scene_.addLine(wid, 0, wid, hgt)
         self.jeu = jeu
+        self.rendering = False
         
         self.liste_texte = [0 for i in range (14)]
 
@@ -81,9 +88,25 @@ class GUI_Isohypses(QWidget):
     def bouger(self, col, ligne):
         self.jeu.reception_clic(col, ligne)
         
-    def MAJ_val(self, liste_val):
+    def MAJ_val(self, liste_val, indice):
+        rendering = True
+        nb_p = int(self.liste_texte[indice].toPlainText())
+        self.liste_texte[indice].setPlainText("0")
+        
+        self.liste_texte[indice].setDefaultTextColor(QColor(255, 0, 0))
+        for i in range(nb_p):
+            pos = i + indice + 1
+            while pos > len(self.liste_texte) - 1:
+                pos -= len(self.liste_texte)
+                print(pos) #à ne pas suppr bug sinon
+            self.liste_texte[pos].setPlainText(str(int(self.liste_texte[pos].toPlainText()) + 1))
+            self.liste_texte[pos].setDefaultTextColor(QColor(255, 0, 0))
+            QtTest.QTest.qWait(250)
+        QtTest.QTest.qWait(1000)
         for i in range(14):
             self.liste_texte[i].setPlainText(str(liste_val[i]))
+            self.liste_texte[i].setDefaultTextColor(QColor(0, 0, 0))
+        rendering = False
             
         
 
