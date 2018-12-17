@@ -28,13 +28,18 @@ class GUI_Isohypses(QWidget):
         self.scene_.addLine(0, 0, wid, 0)
         self.scene_.addLine(0, hgt, wid, hgt)
         self.scene_.addLine(wid, 0, wid, hgt)
+
+        # Initialisation des paramètres pour gérer l'affichage
         self.jeu = jeu
         self.rendering = False
-        
         self.liste_texte = [0 for i in range (14)]
 
+        # Création des 12 zones de jeu
+        # Une zone est représenté par un rond et un texte
+        # Un premier test rajoutait un bouton sur les zones afin de les rendre cliquables
         for i in range(12):
             if i<6:
+                # On crée des ronds de 100 unités de rayon espacés de 111 unités pour la première ligne
                 self.scene_.addEllipse(50 + wid / 9 * (i + 1), hgt / 8, hgt / 4, hgt / 4)
                 text = self.scene_.addText("4")
                 text.setPos(100 + wid / 9 * (i + 1), 50 + hgt / 8)
@@ -47,6 +52,7 @@ class GUI_Isohypses(QWidget):
 #                txt.setGeometry(100 + wid / 9 * (i + 1), 50 + hgt / 8, hgt / 4, hgt / 4)
 #                self.liste_texte[5-i] = txt
             else:
+                # On crée des ronds de 100 unités de rayon espacés de 111 unités pour la seconde ligne
                 self.scene_.addEllipse(50 + wid / 9 * (i - 5), hgt / 8 * 5, hgt / 4, hgt / 4)
                 text = self.scene_.addText("4")
                 text.setPos(100 + wid / 9 * (i - 5), 50 + hgt / 8 * 5)
@@ -59,6 +65,8 @@ class GUI_Isohypses(QWidget):
                 #txt.setGeometry(100 + wid / 9 * (i - 5), 50 + hgt / 8 * 5, hgt / 4, hgt / 4)
                 #self.liste_texte[i + 1] = txt
 
+
+        # On crée les rectangles de la même manière
         self.scene_.addRect(50, hgt / 8 - 10, hgt / 4, hgt - (hgt / 8 - 10) * 2)
         text = self.scene_.addText("0")
         text.setPos(100, 150 + hgt / 8 - 10)
@@ -86,9 +94,25 @@ class GUI_Isohypses(QWidget):
 
 
     def bouger(self, col, ligne):
+        """
+        Fonction permettant le lancement d'un coup sans contrôle
+
+        :param col: colonne du clic
+        :param ligne: ligne du clic
+        :return:
+        """
         self.jeu.reception_clic(col, ligne)
         
     def MAJ_val(self, liste_val, indice):
+        """
+        Fonction mettant à jour l'interface en deux temps
+        Dans le premier temps le coup est rejouée et les valeur affichée en rouge, puis les valeurs sont mises à jour
+        pour inclure les changements liés au règles de vidages des trous
+
+        :param liste_val: valeurs obtenues après le coup
+        :param indice: place où le coup a été jouée
+        :return:
+        """
         rendering = True
         nb_p = int(self.liste_texte[indice].toPlainText())
         self.liste_texte[indice].setPlainText("0")
