@@ -5,13 +5,16 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from QScene import *
 from PyQt5 import QtTest
+from JoueurHumain import JoueurHumain
+import sys
+
 
 # definition d'une GUI
-class GUI_Isohypses(QWidget):
+class GUI_Kalaha(QWidget):
     """
     Classe permettant de visualiser l'état du jeu et d'interagir avec celui-ci
     """
-    def __init__(self, jeu):
+    def __init__(self):
         # Création de la fenètre avec ses paramètres basiques
         QWidget.__init__(self)
         self.setWindowTitle("Kalaha")
@@ -22,7 +25,16 @@ class GUI_Isohypses(QWidget):
         #self.scene_.addLine(0, hgt / 2, 50, hgt / 2)
         #self.scene_.addLine(50 + wid / 9 * 7 + hgt / 4 , hgt / 2, wid, hgt / 2)
         #self.scene_.addLine(50 + hgt / 4, hgt / 2, 50 + wid / 9 * 7, hgt / 2)
+        
+        
+#        monLayout = QGridLayout()
+#        self.b_valider_ = QPushButton("Valider")
+#        self.b_valider_.setFont(QFont("Arial", 16))
+#        self.b_valider_.clicked.connect(self.endgame)
+#        monLayout.addWidget(self.b_valider_)
+#        self.setLayout(monLayout)
 
+        
         # Dessin des contours de la zone de jeu
         self.scene_.addLine(0, 0, 0, hgt)
         self.scene_.addLine(0, 0, wid, 0)
@@ -30,7 +42,7 @@ class GUI_Isohypses(QWidget):
         self.scene_.addLine(wid, 0, wid, hgt)
 
         # Initialisation des paramètres pour gérer l'affichage
-        self.jeu = jeu
+        self.jeu = 0
         self.rendering = False
         self.liste_texte = [0 for i in range (14)]
 
@@ -131,6 +143,20 @@ class GUI_Isohypses(QWidget):
             self.liste_texte[i].setPlainText(str(liste_val[i]))
             self.liste_texte[i].setDefaultTextColor(QColor(0, 0, 0))
         rendering = False
+    
+    def setJeu(self, jeu):
+        self.jeu = jeu
+        
+    def endgame(self):
+        print("salut")
+        import fin as f
+        self.deleteLater()
+        b2 = f.FenetreFin(score, JoueurHumain())
+        b2.show()
+        print("test") #Pas réussi à faire s'afficher autrement l'écran de fon qu'avec ces deux print succesifs
+        print(b2.score)
+        
+            
             
         
 
@@ -139,12 +165,16 @@ def main():
     # creation d'un application
     app = QApplication([])  # on peut aussi passer en paramètre les arguments du programme sys.argv
     # creation d'une interface
-    gui = GUI_Isohypses()
+    gui = GUI_Kalaha()
     # affichage de l'interface
     gui.show()
 
     # lancement de l'application
     r = app.exec_()
+    
+    
+    
+    
     
     
 if __name__ == "__main__":
