@@ -29,6 +29,7 @@ class JoueurOrdi(Joueur):
         Algorithme permettant de trouver le meilleur coup pour le tour suivant
         :param modele: modèle des données
         :param joueur: numéro du joueur en cours
+        :param coup_d_avance: nombre de coup d'avance
         :return: coup à jouer sous forme d'index
         """
         choix = {}
@@ -43,7 +44,7 @@ class JoueurOrdi(Joueur):
                     #Si on rejoue on part sur un processus récursif
                     #Le résultat de plateau final sera alors le plateau après tous les coups rejoués
                     choix_suiv, plateaun = self.meilleur_choix(plateaun, joueur, coup_d_avance)
-                
+                #Si l'ordinateur a le droit il regarde ce que peut répondre l'adversaire
                 if coup_d_avance < self.nb_vision and continu:
                     choix_suiv, plateaun = self.meilleur_choix(plateaun,2 - (joueur - 1), coup_d_avance + 1)
                 #On évalue pour tout les coups la valeur du coup

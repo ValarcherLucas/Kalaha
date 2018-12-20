@@ -10,7 +10,7 @@ class FenetreLancement2(QWidget):
     def __init__(self):
         QWidget.__init__(self)
 
-        self.setWindowTitle("Contre qui voulez vous jouer ? ")
+        self.setWindowTitle("Difficulté de l'ordinateur ? ")
 
         self.j2 = JoueurOrdi(0)
 
@@ -36,8 +36,6 @@ class FenetreLancement2(QWidget):
         self.b4.toggled.connect(lambda: self.btnstate(self.b4))
         monLayout.addWidget(self.b4)
         
-        self.setWindowTitle("RadioButton demo")
-        
         self.b_valider_ = QPushButton("Valider")
         self.b_valider_.setFont(QFont("Arial", 16))
         self.b_valider_.clicked.connect(self.launch_next)
@@ -46,6 +44,12 @@ class FenetreLancement2(QWidget):
         self.setLayout(monLayout)
 
     def btnstate(self, b):
+        """
+        Fonction permettant de changer un paramètre selon la valeur dans le RadioButton
+
+        :param b: radiobutton
+        :return:
+        """
 
         if b.text() == "Très Facile":
             if b.isChecked() == True:
@@ -68,6 +72,10 @@ class FenetreLancement2(QWidget):
                 self.j2 = JoueurOrdi(3)
     
     def launch_next(self):
+        """
+        Fonction permettant de lancer la fenêtre suivante
+        :return:
+        """
         self.deleteLater()
         b2 = it.GUI_Kalaha()
         jeu = j.Jeu(b2, self.j2)

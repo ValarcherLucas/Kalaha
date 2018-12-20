@@ -11,6 +11,12 @@ class Modele():
         self.plateau = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]
     
     def jouer(self, indice):
+        """
+        Fonction permettant de jouer sur une case
+
+        :param indice: case à jouer
+        :return: dernière case jouée
+        """
         nb = self.plateau [indice]
         self.plateau[indice] = 0
         retour = 0
@@ -23,6 +29,13 @@ class Modele():
         return retour
         
     def test_dernier(self, retour, joueur):
+        """
+        Vérification si le dernier point était vide
+
+        :param retour: dernière case
+        :param joueur: joueur qui a joué
+        :return:
+        """
         if self.plateau[retour] == 1:
                 if joueur == 1 and retour >= 7 and retour <= 12:
                     self.vider(joueur, retour)
@@ -30,6 +43,13 @@ class Modele():
                     self.vider(joueur, retour)
         
     def vider(self, joueur, case):
+        """
+        Vider une case et sa case en face
+
+        :param joueur: joueur qui a joué
+        :param case: case à vider
+        :return:
+        """
         if joueur == 1:
             nb1 = self.plateau[case]
             nb2 = self.plateau[case - 7]
@@ -44,6 +64,11 @@ class Modele():
             self.plateau[6] += nb1 + nb2
     
     def fin(self):
+        """
+        Vérification si les conditions de fin sont atteintes
+
+        :return boolean: False si fini, True sinon
+        """
         if self.plateau[0:6] == [0,0,0,0,0,0]:
                 nb = 0
                 for i in range (6):
